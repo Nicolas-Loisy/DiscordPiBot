@@ -53,7 +53,6 @@ async def effacer(ctx, nombre: int):
     await ctx.channel.purge(limit=nombre+1)
     await ctx.send(f'Effacé {nombre} messages.')
 
-
 @bot.command()
 async def sondage(ctx, question, *options):
     if len(options) < 2:
@@ -131,8 +130,6 @@ async def meteo(ctx, ville=None):
         await ctx.send("Impossible de récupérer les informations météorologiques pour cette ville.")
 
 
-
-
 @bot.command()
 async def savephoto(ctx):
     # Vérifie si un fichier image est attaché au message
@@ -184,6 +181,8 @@ async def savesound(ctx, name: str):
 @bot.command()
 async def playsound(ctx, name):
     voice_state = ctx.author.voice
+    # voice_state.self_mute = False
+
     if voice_state is None or voice_state.channel is None:
         await ctx.send("Vous devez être connecté à un salon vocal pour utiliser cette commande.")
         return
@@ -193,14 +192,16 @@ async def playsound(ctx, name):
 
     if voice_client is not None and voice_client.is_connected():
         if voice_client.channel == voice_channel:
-            await ctx.send("Le bot est déjà connecté à votre salon vocal.")
-            return
+            print("Le bot est déjà connecté à votre salon vocal.")
+
+            if voice_client.is_playing():
+                await ctx.send("Le bot est déjà en train de jouer un son.")
+                print("Le bot est déjà en train de jouer un son.")
+                return
         else:
             await voice_client.disconnect()
-
+    
     await voice_channel.connect()
-
-    await ctx.send(f"Joue le son : {name}")
 
     audio_source = discord.FFmpegPCMAudio(f'sounds/{name}.mp3')
     voice_client = ctx.voice_client
@@ -215,5 +216,9 @@ async def playsound(ctx, name):
 
 # Controler GPIO PI
 
+@bot.command()
+async def logout(ctx):
+    # await ctx.send(f"Logout !")
+    await bot.close()
 
 bot.run(token)
