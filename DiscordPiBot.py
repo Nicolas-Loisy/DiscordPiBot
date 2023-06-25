@@ -4,6 +4,7 @@
 # py -3 -m pip install -U requests
 # py -3 -m pip install -U ffmpeg-python
 # py -3 -m pip install -U ffmpeg #KO
+# py -3 -m pip install -U gitpython
 
 import sys
 import discord
@@ -14,6 +15,7 @@ import random
 import requests
 import os
 import asyncio
+import git
 
 # import ffmpeg
 from pydub import AudioSegment
@@ -215,5 +217,42 @@ async def playsound(ctx, name):
 
 # Controler GPIO PI
 
+# S2E7 16:00 sound
 
+@bot.command()
+async def logout(ctx):
+    if str(config('MON_ID_UTILISATEUR'))  == str(ctx.author.id):
+        await bot.close()
+    else:
+        await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
+
+
+@bot.command()
+async def restart(ctx):
+    if str(config('MON_ID_UTILISATEUR'))  == str(ctx.author.id):
+        await ctx.send("Redémarrage en cours...")
+
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+
+        # Arrêter l'exécution du code ici pour éviter les doublons de processus
+        return
+
+    else:
+        await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
+
+
+@bot.command()
+async def update(ctx):
+    repo = git.Repo("./DiscordPiBot")  # Chemin vers le répertoire racine de votre programme
+
+    try:
+        repo.remotes.origin.pull()
+        await ctx.send("Mise à jour réussie. Redémarrer le bot pour lancer les modifications.")
+ 
+    except git.GitCommandError as e:
+        await ctx.send("Erreur lors de la mise à jour du programme.")
+        print(e)
+
+# Lancement du bot
 bot.run(token)
