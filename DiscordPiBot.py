@@ -210,7 +210,9 @@ async def playsound(ctx, name):
     await ctx.send(f"Joue le son : {name}")
 
 
+# Lister les fichiers audio
 
+# Automatiser le pull / update du code + restart du programme => voir histo GPT
 
 # Generer / Uploader aleat rec Glados
 
@@ -220,4 +222,20 @@ async def playsound(ctx, name):
 async def logout(ctx):
     await bot.close()
 
+@bot.command()
+async def restart(ctx):
+    if str(config('MON_ID_UTILISATEUR'))  == str(ctx.author.id):
+        await ctx.send("Redémarrage en cours...")
+
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+
+        # Arrêter l'exécution du code ici pour éviter les doublons de processus
+        return
+
+    else:
+        await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
+
+
+# Lancement du bot
 bot.run(token)
