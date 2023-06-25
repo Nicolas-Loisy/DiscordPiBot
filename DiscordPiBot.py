@@ -181,7 +181,6 @@ async def savesound(ctx, name: str):
 @bot.command()
 async def playsound(ctx, name):
     voice_state = ctx.author.voice
-    # voice_state.self_mute = False
 
     if voice_state is None or voice_state.channel is None:
         await ctx.send("Vous devez être connecté à un salon vocal pour utiliser cette commande.")
@@ -219,7 +218,6 @@ async def playsound(ctx, name):
 
 @bot.command()
 async def logout(ctx):
-    # await ctx.send(f"Logout !")
     await bot.close()
 
 bot.run(token)
