@@ -200,8 +200,9 @@ async def playsound(ctx, name):
                 return
         else:
             await voice_client.disconnect()
-    
-    await voice_channel.connect()
+            await voice_channel.connect(self_mute = False)
+    else:
+        await voice_channel.connect(self_mute = False)
 
     audio_source = discord.FFmpegPCMAudio(f'sounds/{name}.mp3')
     voice_client = ctx.voice_client
