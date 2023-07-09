@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 ## Installation via terminal Python
 # py -3 -m pip install -U discord.py==2.0.0
 # py -3 -m pip install -U python-decouple
@@ -214,8 +216,6 @@ async def playsound(ctx, name):
 
 # Lister les fichiers audio
 
-# Automatiser le pull / update du code + restart du programme => voir histo GPT
-
 # Generer / Uploader aleat rec Glados
 
 # Controler GPIO PI
@@ -229,14 +229,15 @@ async def logout(ctx):
     else:
         await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
 
-
 @bot.command()
 async def restart(ctx):
     if str(config('MON_ID_UTILISATEUR'))  == str(ctx.author.id):
         await ctx.send("Redémarrage en cours...")
 
-        python = sys.executable
-        os.execl(python, python, *sys.argv)
+        print("argv was",sys.argv)
+        print("sys.executable was", sys.executable)
+        print("restart now")
+        os.execv(sys.executable, ['python'] + sys.argv)
 
         # Arrêter l'exécution du code ici pour éviter les doublons de processus
         return
@@ -244,13 +245,12 @@ async def restart(ctx):
     else:
         await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
 
-
 @bot.command()
 async def update(ctx):
     repo = git.Repo("./DiscordPiBot")  # Chemin vers le répertoire racine de votre programme
 
     try:
-        repo.remotes.origin.pull()
+        repo.remotes.origin.pull(config('UPDATE_BRANCH'))
         await ctx.send("Mise à jour réussie. Redémarrer le bot pour lancer les modifications.")
  
     except git.GitCommandError as e:
