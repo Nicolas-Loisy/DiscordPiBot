@@ -1,2 +1,4 @@
 .env
-commands/command_ytb.py
+app/commands/__pycache__/
+data/photos/
+data/sounds/
