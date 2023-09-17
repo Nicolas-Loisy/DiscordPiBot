@@ -7,6 +7,7 @@ import git
 def setup(bot):
     bot.add_command(restart)
     bot.add_command(update)
+    bot.add_command(shutdown)
  
 @commands.command()
 async def restart(ctx):
@@ -36,3 +37,11 @@ async def update(ctx):
     except git.GitCommandError as e:
         await ctx.send("Erreur lors de la mise à jour du programme.")
         print(e)
+
+@commands.command()
+async def shutdown(ctx):
+    if str(config('MON_ID_UTILISATEUR'))  == str(ctx.author.id):
+        await ctx.send("Arrêt en cours...")
+        await ctx.bot.close()
+    else:
+        await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
