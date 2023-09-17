@@ -34,17 +34,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Connecté en tant que {bot.user.name}')
 
-@commands.command()
-async def logout(ctx):
-    if str(config('MON_ID_UTILISATEUR'))  == str(ctx.author.id):
-        await bot.close()
-    else:
-        await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
-
-
-
 # Ajoutez vos commandes au bot
-bot.add_command(logout)
 admin.setup(bot)
 tools.setup(bot)
 picturesAndSounds.setup(bot)
