@@ -111,6 +111,22 @@ DiscordPiBot offre également des commandes pour ajouter de l'amusement et de la
 
 - `!listtracks`: Affiche la liste des sons personnalisés disponibles pour la lecture.
 
+### Commandes NASA
+
+Les commandes NASA vous permettent d'explorer l'univers fascinant de la NASA et d'accéder à diverses informations, images et données provenant de l'Agence spatiale américaine.
+
+- `!asteroides`: Fournit des informations sur les astéroïdes proches de la Terre.
+
+- `!terre`: Affiche une image récente de la Terre capturée par la caméra EPIC (Earth Polychromatic Imaging Camera) de la NASA.
+
+- `!terreAll`: Permet d'accéder à une collection d'images EPIC de la Terre capturées à différentes dates.
+
+- `!apod`: Image astronomique du jour (APOD) de la NASA. Chaque jour, une nouvelle image et une explication passionnante vous sont fournies.
+
+- `!mars`: Photos prises par le rover Curiosity sur Mars.
+
+- `!nasa [recherche]`: Permet de rechercher des images archivées par la NASA en fonction de votre terme de recherche.
+
 <!-- Ajoutez d'autres commandes et leurs descriptions ici si nécessaire -->
 
 N'hésitez pas à personnaliser davantage ces descriptions en fonction de vos besoins ou à ajouter d'autres commandes au besoin.

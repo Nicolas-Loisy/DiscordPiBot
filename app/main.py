@@ -7,6 +7,7 @@
 # py -3 -m pip install -U ffmpeg-python
 # py -3 -m pip install -U ffmpeg #KO
 # py -3 -m pip install -U gitpython
+# py -3 -m pip install -U psutil
 
 import sys
 import discord
@@ -17,6 +18,7 @@ from decouple import config
 from commands import admin
 from commands import tools
 from commands import picturesAndSounds
+from commands import nasa
 
 
 # Ajouter cette variable dans le fichier .env
@@ -38,6 +40,7 @@ async def on_ready():
 admin.setup(bot)
 tools.setup(bot)
 picturesAndSounds.setup(bot)
+nasa.setup(bot)
 
 
 # Lancement du bot
