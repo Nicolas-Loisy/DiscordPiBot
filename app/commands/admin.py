@@ -19,10 +19,6 @@ async def restart(ctx):
         print("restart now")
         
         os.execv(sys.executable, ['python'] + sys.argv)
-        # Arrêter l'exécution du code ici pour éviter les doublons de processus
-        # return
-        # sys.exit(1)
-        # sys.exit()
     else:
         await ctx.send("Vous n'êtes pas autorisé à utiliser cette commande.")
 
